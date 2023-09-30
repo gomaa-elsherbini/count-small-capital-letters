@@ -2,6 +2,18 @@
 #include <string>
 using namespace std;
 
+
+
+enum enCharCase {Small=1, Capital=2};
+
+enCharCase charCase(char myChar)
+{
+	if (isupper(myChar))
+		return enCharCase::Capital;
+	else if(islower(myChar))
+		return enCharCase::Small;
+}
+
 string readString()
 {
 	string str;
@@ -12,11 +24,12 @@ string readString()
 	return str;
 }
 
-void countCharacterCase(char myChar, int &smallLetters, int &capitalLetters)
+
+void countCharacterCase( char myChar, int &smallLetters, int &capitalLetters)
 {
-	if (isupper(myChar))
+	if (charCase(myChar) == enCharCase::Capital)
 		capitalLetters++;
-	else if (islower(myChar))
+	else if (charCase(myChar) == enCharCase::Small)
 		smallLetters++;
 }
 
@@ -24,6 +37,7 @@ void printStringDetails(string str)
 {
 	int smallLetters = 0;
 	int capitalLetters = 0;
+
 
 	for (int i = 0; i < str.length(); i++)
 	{
